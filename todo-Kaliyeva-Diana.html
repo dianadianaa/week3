@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+<style>
+body {
+  margin: 0;
+
+}
+
+
+* {
+  box-sizing: border-box;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+ul li {
+  cursor: pointer;
+  position: relative;
+  padding: 12px 8px 12px 40px;
+  
+  background: #eee;
+  font-size: 18px;  
+}
+
+
+
+/* затемнить*/
+ul li:hover {
+  background: #ddd;
+}
+
+/* когда нажимают, зачеркни и поменяй фон текста */
+ul li.checked {
+  background: #888;
+  color: #fff;
+  text-decoration: line-through;
+}
+
+/* добавляем галочку */
+ul li.checked::before {
+  content: '';
+  position: absolute;
+  border-color: #fff;
+  border-style: solid;
+  border-width: 0 2px 2px 0;
+  top: 10px;
+  left: 16px;
+  transform: rotate(45deg);
+  height: 15px;
+  width: 7px;
+}
+
+
+
+.close {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 12px 16px 12px 16px;
+}
+
+
+
+
+.header {
+  background-color :rgb(32, 31, 31);
+  padding: 30px 10px;
+  color: white;
+}
+.cont {
+margin: auto;    
+text-align: center ;
+ width: 70%;
+  padding: 30px 10px;
+ 
+}
+
+.cont:after {
+  
+  clear: both;
+}
+.header:after {
+ 
+  
+  clear: both;
+}
+
+/* вставка текста*/
+input {
+  border: none;
+  border-radius: 0;
+  width: 70%;
+  
+  /* float: center; */
+  font-size: 16px;
+
+}
+
+/* кнопка добавления */
+.addBtn {
+  padding: 10px;
+  width: 30%;
+  background: #d9d9d9;
+  color: #555;
+  /* float: right; */
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  /* transition: 0.3s; */
+  border-radius: 0;
+  top: 60px;
+ 
+}
+
+.addBtn:hover {
+  background-color: #bbb;
+}
+</style>
+</head>
+<body>
+
+
+<div id="myDIV" class="header">
+  <h2 style="margin:5px">ToDo List</h2><br>
+</div>
+
+<div id="content" class="cont">ToDo List<br>
+    <input type="text" id="myInput" placeholder="New task...">
+  <span onclick="newElement()" class="addBtn">Add</span>    
+</div>
+
+<ul id="myUL">
+  <li>First item</li>
+  <li class="checked">Second Item</li>
+  <li>Third item</li>
+</ul>
+
+
+<script>
+// Создаем крестик в каждом элементе списка
+var elementspiska = document.getElementsByTagName("LI");
+var i;
+for (i = 0; i < elementspiska.length; i++) {
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  elementspiska[i].appendChild(span);
+}
+
+// Удаляем элемент списка при нажатии на закрыть
+var zakryt = document.getElementsByClassName("close");
+var i;
+for (i = 0; i < zakryt.length; i++) {
+  zakryt[i].onclick = function() {
+    var div = this.parentElement;
+    div.style.display = "none";
+  }
+}
+
+// добавляем галочку к каждому элменту строки когданажимаем
+var list = document.querySelector('ul');
+list.addEventListener('click', function(ev) {
+  if (ev.target.tagName === 'LI') {
+    ev.target.classList.toggle('checked');
+  }
+}, false);
+
+// добавляем дело когда нажимаем на добавить
+function newElement() {
+  var li = document.createElement("li");
+  var inputValue = document.getElementById("myInput").value;
+  var t = document.createTextNode(inputValue);
+  li.appendChild(t);
+  if (inputValue === '') {
+    alert("Напишите что нибудь!");
+  } else {
+    document.getElementById("myUL").appendChild(li);
+  }
+  document.getElementById("myInput").value = "";
+
+  var span = document.createElement("SPAN");
+  var txt = document.createTextNode("\u00D7");
+  span.className = "close";
+  span.appendChild(txt);
+  li.appendChild(span);
+
+  for (i = 0; i < close.length; i++) {
+    close[i].onclick = function() {
+      var div = this.parentElement;
+      div.style.display = "none";
+    }
+  }
+}
+</script>
+
+</body>
+</html>
+
